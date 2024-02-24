@@ -6,20 +6,21 @@ echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/rocm.gpg] https://repo.radeon.
 echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
     | sudo tee /etc/apt/preferences.d/rocm-pin-600
 
+amdgpu-install --usecase=rocm,hiplibsdk --rocmrelease=6.0.2
 
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/rocm.gpg] https://repo.radeon.com/rocm/apt/5.4 jammy main" \
     | sudo tee --append /etc/apt/sources.list.d/rocm.list
 echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
     | sudo tee /etc/apt/preferences.d/rocm-pin-600
 
-amdgpu-install --rocmrelease=5.4.0 --no-32
+amdgpu-install --usecase=rocm,hiplibsdk --rocmrelease=5.4.0
 
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/rocm.gpg] https://repo.radeon.com/rocm/apt/5.6 jammy main" \
     | sudo tee --append /etc/apt/sources.list.d/rocm.list
 echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
     | sudo tee /etc/apt/preferences.d/rocm-pin-600
 
-amdgpu-install --rocmrelease=5.6.0 --no-32
+amdgpu-install --usecase=rocm,hiplibsdk --rocmrelease=5.6.0
 
 
 # 推荐使用docker！！！
