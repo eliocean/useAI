@@ -17,3 +17,28 @@ echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
     | sudo tee /etc/apt/preferences.d/rocm-pin-600
 
 amdgpu-install --rocmrelease=5.6.0 --no-32
+
+
+
+
+# 选择rocm版本
+# 在～/.bashrc中增加以下代码，然后执行source ～/.bashrc
+# 使用方式: switch_rocm 5.6.0
+switch_rocm() {
+    local version=$1
+    if [ -d "/opt/rocm-$version" ]; then
+        export ROCM_PATH="/opt/rocm-$version"
+    else
+        echo "ROCm version $version is not installed."
+        return 1
+    fi
+
+    # 清除旧的ROCm bin和libraries路径
+    export PATH=$(echo $PATH | awk -v RS=: -v ORS=: '/rocm/ {next} {print}')
+    export LD_LIBRARY_PATH=$(echo $LD_LIBRARY_PATH | awk -v RS=: -v ORS=: '/rocm/ {next} {print}')
+
+    # 添加新的ROCm bin和libraries路径
+    export PATH="$ROCM_PATH/bin:$PATH"
+    export LD_LIBRARY_PATH="$ROCM_PATH/lib:$ROCM_PATH/lib64:$LD_LIBRARY_PATH"
+    echo "Switched to ROCm version $version"
+}
