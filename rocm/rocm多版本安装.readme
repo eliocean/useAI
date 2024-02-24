@@ -1,3 +1,6 @@
+# 推荐使用docker！！！
+
+
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/rocm.gpg] https://repo.radeon.com/rocm/apt/6.0.2 jammy main" \
     | sudo tee --append /etc/apt/sources.list.d/rocm.list
 echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
@@ -19,7 +22,7 @@ echo -e 'Package: *\nPin: release o=repo.radeon.com\nPin-Priority: 600' \
 amdgpu-install --rocmrelease=5.6.0 --no-32
 
 
-
+# 推荐使用docker！！！
 
 # 选择rocm版本
 # 在～/.bashrc中增加以下代码，然后执行source ～/.bashrc
